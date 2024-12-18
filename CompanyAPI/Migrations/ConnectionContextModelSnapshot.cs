@@ -62,6 +62,10 @@ namespace CompanyAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasMaxLength(20)

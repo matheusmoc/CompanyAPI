@@ -6,6 +6,8 @@ namespace CompanyAPI.ViewModel
     {
         public int Id { get; set; }
 
+        public IFormFile? Photo { get; set; }
+
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [MaxLength(100, ErrorMessage = "O nome pode ter no máximo 100 caracteres.")]
         public required string Name { get; set; }

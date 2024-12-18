@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CompanyAPI.Model
 {
@@ -8,6 +9,8 @@ namespace CompanyAPI.Model
     {
         [Key]
         public int Id { get; private set; }
+
+        public string? Photo {  get; private set; }
 
         [Required]
         [MaxLength(100)] 
@@ -46,9 +49,10 @@ namespace CompanyAPI.Model
         [MaxLength(100)]
         public string Country { get; private set; }
 
-        public Employee(string name, string email, string document, string phone, string address, string city, string region, string postalCode, string country)
+        public Employee(string name, string? photo, string email, string document, string phone, string address, string city, string region, string postalCode, string country)
         {
             Name = name ?? throw new NotImplementedException(nameof(name));
+            Photo = photo;
             Email = email;
             Document = document;
             Phone = phone;
