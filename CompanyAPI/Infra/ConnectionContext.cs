@@ -7,11 +7,8 @@ namespace CompanyAPI.Infra
     {
         public DbSet<Employee> Employees { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ConnectionContext(DbContextOptions<ConnectionContext> options) : base(options)
         {
-            base.OnConfiguring(optionsBuilder.UseSqlServer(
-                "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"
-            ));
         }
     }
 }

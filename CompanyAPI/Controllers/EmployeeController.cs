@@ -11,8 +11,12 @@ namespace CompanyAPI.Controllers
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
         [HttpPost]
-        public IActionResult Create(EmployeeViewModel model)
+        public async Task<IActionResult> Create(EmployeeViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var employee = new Employee(
                 model.Name,
@@ -26,15 +30,15 @@ namespace CompanyAPI.Controllers
                 model.Country
             );
 
-            _employeeRepository.AddAsync(employee);
+            await _employeeRepository.AddAsync(employee);
 
             return Ok();
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var employee = _employeeRepository.GetAllAsync();
+            var employee = await _employeeRepository.GetAllAsync();
 
             return Ok(employee);
 
