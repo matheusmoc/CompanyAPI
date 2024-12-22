@@ -25,8 +25,7 @@ namespace CompanyAPI.Infra
 
         public async Task<Employee> GetAsync(int id)
         {
-            var employee = await _connectionContext.Employees.FindAsync(id);
-            return employee ?? throw new KeyNotFoundException($"Employee with id {id} not found");
+            return await _connectionContext.Employees.FindAsync(id) ?? throw new KeyNotFoundException($"Employee with id {id} not found");
         }
 
     }
