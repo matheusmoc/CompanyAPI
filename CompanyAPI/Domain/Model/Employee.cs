@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CompanyAPI.Model
+namespace CompanyAPI.Domain.Model
 {
     [Table("employee")]
     public class Employee
@@ -10,14 +10,14 @@ namespace CompanyAPI.Model
         [Key]
         public int Id { get; private set; }
 
-        public string? Photo {  get; private set; }
+        public string? Photo { get; private set; }
 
         [Required]
-        [MaxLength(100)] 
+        [MaxLength(100)]
         public string Name { get; private set; }
 
         [Required]
-        [EmailAddress] 
+        [EmailAddress]
         public string Email { get; private set; }
 
 
@@ -26,11 +26,11 @@ namespace CompanyAPI.Model
         public string Document { get; private set; }
 
         [Required]
-        [Phone] 
+        [Phone]
         public string Phone { get; private set; }
 
         [Required]
-        [MaxLength(200)] 
+        [MaxLength(200)]
         public string Address { get; private set; }
 
         [Required]
@@ -42,7 +42,7 @@ namespace CompanyAPI.Model
         public string Region { get; private set; }
 
         [Required]
-        [MaxLength(20)] 
+        [MaxLength(20)]
         public string PostalCode { get; private set; }
 
         [Required]

@@ -1,5 +1,6 @@
+using CompanyAPI.Domain.Model;
 using CompanyAPI.Infra;
-using CompanyAPI.Model;
+using CompanyAPI.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

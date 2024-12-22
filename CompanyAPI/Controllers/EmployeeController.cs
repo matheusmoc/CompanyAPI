@@ -1,5 +1,5 @@
-﻿using CompanyAPI.Model;
-using CompanyAPI.ViewModel;
+﻿using CompanyAPI.Application.ViewModel;
+using CompanyAPI.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyAPI.Controllers

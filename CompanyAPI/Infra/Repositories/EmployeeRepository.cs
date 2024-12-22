@@ -1,7 +1,7 @@
-﻿using CompanyAPI.Model;
+﻿using CompanyAPI.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace CompanyAPI.Infra
+namespace CompanyAPI.Infra.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {

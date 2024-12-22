@@ -1,4 +1,4 @@
-﻿using CompanyAPI.Model;
+﻿using CompanyAPI.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyAPI.Infra
