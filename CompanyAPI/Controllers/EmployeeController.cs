@@ -6,9 +6,17 @@ namespace CompanyAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/employee")]
-    public class EmployeeController(IEmployeeRepository employeeRepository) : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository _employeeRepository = employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly ILogger<EmployeeController> _logger;
+
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
+        {
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeViewModel employeeView)
@@ -16,7 +24,7 @@ namespace CompanyAPI.Controllers
 
             string? filePath = null;
 
-            // Verificar se a foto foi enviada
+
             if (employeeView.Photo != null)
             {
                 filePath = Path.Combine("Storage", employeeView.Photo.FileName);
@@ -66,9 +74,10 @@ namespace CompanyAPI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int pageNumber, int pageQuantity)
         {
-            var employee = await _employeeRepository.GetAllAsync();
+            _logger.Log(LogLevel.Information, "Listagem de funcionários");
+            var employee = await _employeeRepository.GetAllAsync(pageNumber, pageQuantity);
 
             return Ok(employee);
 

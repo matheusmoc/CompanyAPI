@@ -4,7 +4,7 @@
     {
         Task AddAsync(Employee employee); 
 
-        Task<List<Employee>> GetAllAsync();
+        Task<List<Employee>> GetAllAsync(int pageNumber, int pageQuantity);
 
         Task<Employee> GetAsync(int id);
     }

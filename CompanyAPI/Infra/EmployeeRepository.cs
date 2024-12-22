@@ -18,9 +18,9 @@ namespace CompanyAPI.Infra
             await _connectionContext.SaveChangesAsync();
         }
 
-        public async Task<List<Employee>> GetAllAsync()
+        public async Task<List<Employee>> GetAllAsync(int pageNumber, int pageQuantity)
         {
-            return await _connectionContext.Employees.ToListAsync();
+            return await _connectionContext.Employees.Skip(pageNumber * pageQuantity).Take(pageQuantity).ToListAsync();
         }
 
         public async Task<Employee> GetAsync(int id)
