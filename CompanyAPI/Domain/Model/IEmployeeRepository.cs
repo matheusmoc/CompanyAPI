@@ -1,10 +1,12 @@
-﻿namespace CompanyAPI.Domain.Model
+﻿using CompanyAPI.Domain.DTOs;
+
+namespace CompanyAPI.Domain.Model
 {
     public interface IEmployeeRepository
     {
         Task AddAsync(Employee employee);
 
-        Task<List<Employee>> GetAllAsync(int pageNumber, int pageQuantity);
+        Task<List<EmployeeDTO>> GetAllAsync(int pageNumber, int pageQuantity);
 
         Task<Employee> GetAsync(int id);
     }

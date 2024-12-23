@@ -1,5 +1,7 @@
-﻿using CompanyAPI.Domain.Model;
+﻿using CompanyAPI.Domain.DTOs;
+using CompanyAPI.Domain.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace CompanyAPI.Infra.Repositories
 {
@@ -18,9 +20,24 @@ namespace CompanyAPI.Infra.Repositories
             await _connectionContext.SaveChangesAsync();
         }
 
-        public async Task<List<Employee>> GetAllAsync(int pageNumber, int pageQuantity)
+        public async Task<List<EmployeeDTO>> GetAllAsync(int pageNumber, int pageQuantity)
         {
-            return await _connectionContext.Employees.Skip(pageNumber * pageQuantity).Take(pageQuantity).ToListAsync();
+            return await _connectionContext.Employees
+                .Skip(pageNumber * pageQuantity)
+                .Take(pageQuantity)
+                .Select(e => new EmployeeDTO()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Photo = e.Photo,
+                Phone = e.Phone,
+                Address = e.Address,
+                City = e.City,
+                Region = e.Region,
+                PostalCode = e.PostalCode,
+                Country = e.Country,
+
+            }).ToListAsync();
         }
 
         public async Task<Employee> GetAsync(int id)
