@@ -1,4 +1,6 @@
-﻿using CompanyAPI.Application.ViewModel;
+﻿using AutoMapper;
+using CompanyAPI.Application.ViewModel;
+using CompanyAPI.Domain.DTOs;
 using CompanyAPI.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,13 +12,14 @@ namespace CompanyAPI.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger, IMapper mapper)
         {
-            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _employeeRepository = employeeRepository;
+            _logger = logger;
+            _mapper = mapper;
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeViewModel employeeView)
@@ -81,6 +84,20 @@ namespace CompanyAPI.Controllers
 
             return Ok(employee);
 
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> Search(int id)
+        {
+            var employee = await _employeeRepository.GetAsync(id);
+            var employeesDTO = _mapper.Map<Employee>(employee);
+            if (employeesDTO == null)
+            {
+                return NotFound($"Employee with ID {id} not found.");
+            }
+
+            return Ok(employeesDTO);
         }
 
     }

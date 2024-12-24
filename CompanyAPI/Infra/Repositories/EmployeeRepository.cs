@@ -26,18 +26,18 @@ namespace CompanyAPI.Infra.Repositories
                 .Skip(pageNumber * pageQuantity)
                 .Take(pageQuantity)
                 .Select(e => new EmployeeDTO()
-            {
-                Id = e.Id,
-                Name = e.Name,
-                Photo = e.Photo,
-                Phone = e.Phone,
-                Address = e.Address,
-                City = e.City,
-                Region = e.Region,
-                PostalCode = e.PostalCode,
-                Country = e.Country,
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Photo = e.Photo,
+                    Phone = e.Phone,
+                    Address = e.Address,
+                    City = e.City,
+                    Region = e.Region,
+                    PostalCode = e.PostalCode,
+                    Country = e.Country,
 
-            }).ToListAsync();
+                }).ToListAsync();
         }
 
         public async Task<Employee> GetAsync(int id)

@@ -1,3 +1,4 @@
+using CompanyAPI.Application.Mapping;
 using CompanyAPI.Domain.Model;
 using CompanyAPI.Infra;
 using CompanyAPI.Infra.Repositories;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
